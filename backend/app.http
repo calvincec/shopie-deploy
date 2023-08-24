@@ -1,0 +1,117 @@
+###PRODUCT CONTROLLERS
+###Add new product
+POST http://localhost:4503/product
+Content-Type: application/json
+
+{
+   "productName": "clothed piece phone wear",
+   "productDescription": "Fashion 6Pcs Soft Cotton Checked Men's Boxers – Multicolor",
+   "price": 650,
+   "productImage": "https://ke.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/91/432928/1.jpg?7106",
+   "stock": 198
+}
+
+
+###Get all products
+GET http://localhost:4503/product/all
+Content-Type: application/json
+
+###Get one product
+GET http://localhost:4503/product/one/c5db4628-6096-4b2e-a50f-1691d33e25be
+
+
+###Update product
+PUT http://localhost:4503/product/60a15ccc-9eda-4720-a0c3-16ff9d0fd9e8
+Content-Type: application/json
+
+
+{
+   "productName": "Steel door",
+   "productDescription": "To prevent thieves",
+   "price": 400000000,
+   "productImage": "https://images.pexels.com/photos/7054511/pexels-photo-7054511.jpeg?auto=compress&cs=tinysrgb&w=600",
+   "stock": 4543
+}
+
+###Delete product
+DELETE http://localhost:4503/product/c5db4628-6096-4b2e-a50f-1691d33e25be
+
+
+
+### MANAGE CART
+
+###add to cart
+POST http://localhost:4503/cart/d7abc609-b651-404d-81a1-8d6bf5c1855c
+Content-Type: application/json
+
+{
+   "productId": "229a1597-b2d5-46c7-a37b-2c58a424faab",
+   "orderNo": 2
+}
+
+
+###user view all products in cart
+GET  http://localhost:4503/cart/view/d7abc609-b651-404d-81a1-8d6bf5c1855c
+
+###user remove item from cart
+DELETE http://localhost:4503/cart/722e4d88-b2e8-4cc3-b8c8-6b1ad7433bd1
+Content-Type: application/json
+
+###
+DELETE http://localhost:4503/cart/3652a832-dfb0-4019-ac2a-c8060112826e
+
+
+
+
+
+
+###USERS CONTROLLERS
+
+### Register user
+POST http://localhost:4503/users/register
+Content-Type: application/json
+
+{
+   "UserName": "Calvince Ndemo",
+   "Email": "calyndemo16@gmail.com",
+   "Password": "12345678",
+   "PhoneNumber": "254726080405",
+   "isActive": 1,
+   "isAdmin": 1
+
+
+}
+### get user details
+GET http://localhost:4503/users/f3b4ebe7-f121-4b67-a58d-1f1c8f900f59
+
+### Login user
+POST http://localhost:4503/users/login
+Content-Type: application/json
+
+{
+ "Email": "calyndemo16@gmail.com",
+ "Password": "12345678"
+
+
+}
+
+### Get all customers
+GET http://localhost:4503/users/customers/get-all-customers
+
+
+### Update user
+PATCH http://localhost:4503/users/update-information/f3b4ebe7-f121-4b67-a58d-1f1c8f900f59
+Content-Type: application/json
+
+{
+    "Email": "Kevin.mathenge@mail.com",
+    "PhoneNumber": "123456789"
+}
+
+### Deactivate account
+
+POST http://localhost:4503/users/disable-account/172823eb-4088-4c1c-961e-62ce515bf8f9
+# EXEC UpdateUserProcedure
+#     @UserID = 'f3b4ebe7-f121-4b67-a58d-1f1c8f900f59',
+#     @Email = 'Kevin.mathenge@mail.com',
+#     @PhoneNumber = '1234567890';
