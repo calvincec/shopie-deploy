@@ -1,0 +1,172 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shoppie</title>
+
+    <link rel="stylesheet" href="customer-dashboard.css">
+    <link rel="stylesheet" href="/Frontend/admin-dashboard/admin-dashboard.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+</head>
+
+<body>
+
+
+    <div id="user-ui" style="display: none;">
+
+        <div class="top-nav">
+            <div class="alternating-menu">
+                <p id="alternateText">Welcome to Shoppie</p>
+            </div>
+            <div class="search-container">
+                <input type="text" id="search" placeholder="Search...">
+                <button type="button" id="search-button">Search Products</button>
+            </div>
+            <div class="menus">
+                <div class="dropdown">
+                    <span class="material-symbols-outlined clickable">person</span>
+                    <div class="dropdown-content">
+                        <a onclick="viewProfile()">View Profile</a>
+                        <a id="user-logout" onclick="logout()">Logout</a>
+                    </div>
+                </div>
+                <span class="material-symbols-outlined clickable"
+                    onclick="window.location.href ='/Frontend/cart/cart.html' " id="shopping-cart">shopping_cart</span>
+                <p id="helloCustomerMessage"></p>
+            </div>
+        </div>
+        <div id="toast" class="toast">
+            Item added to cart!
+        </div>
+
+
+
+        <div class="product-container" id="productContainer">
+
+        </div>
+
+        <div style="display: none;" id="lottie-animation">
+            <lottie-player src="https://lottie.host/e62d7192-b56b-4e78-8103-eaa618ff6947/mn9eq0lpZX.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+            <h2>No results found :(</h2>
+        </div>
+      
+        
+
+        <script>
+
+            document.addEventListener("DOMContentLoaded", function () {
+                $(".dropdown").click(function (event) {
+                    event.stopPropagation();
+                    $(this).find(".dropdown-content").toggle();
+                });
+
+                // Hide the dropdown content on DOM content load
+                $(".dropdown-content").hide();
+
+                $(document).click(function (event) {
+                    if (!$(event.target).closest(".dropdown").length) {
+                        $(".dropdown-content").hide();
+                    }
+                });
+            });
+
+
+        </script>
+
+
+    </div>
+
+    <div id="admin-ui" style="display: none;">
+        <style>
+            #add-products {
+                padding: 10px 20px;
+                background-color: white;
+                border: none;
+                border-radius: 5px;
+                color: black;
+                font-size: 16px;
+                cursor: pointer;
+                margin-left: 20px;
+            }
+
+            #add-products:hover {
+                background-color: #0056b3;
+            }
+        </style>
+        <div class="top-nav">
+            <div class="alternating-menu">
+                <p id="alternateText">Welcome to Shoppie</p>
+            </div>
+            <div class="search-container">
+                <input type="text" id="searchadm" placeholder="Type here to search...">
+                <button type="button" id="search-button">Search Products</button>
+                <button type="button" id="add-products">Add Product</button>
+            </div>
+            <div class="menus">
+                <div class="dropdown">
+                    <span class="material-symbols-outlined clickable" onclick="viewProfile()">person</span>
+                    <div class="dropdown-content">
+
+                        <a href="#" onclick="logout()">Logout</a>
+                    </div>
+                </div>
+
+                <p style="color: white;" id="helloAdminMessage"></p>
+            </div>
+        </div>
+
+        <div class="info" style="color: green;"></div>
+        <div  id="productContaineradm">
+                <div class="addproduct" >
+                    <h2 class="carthead"><span class="addnew">Add a New Product</span> <img src="/Frontend/Assets/cancel.png" alt="" class="cancelbtn"></h2>
+                    <form enctype="multipart/form-data" action="submit_product.php" method="POST" class="addproductfm">
+                        <label for="product-name">Product Name:</label>
+                        <input type="text" id="product-name" name="product-name" required>
+            
+                        <label for="product-description">Product Description:</label>
+                        <textarea id="product-description" name="product-description" required></textarea>
+            
+                        <label for="product-price">Price:</label>
+                        <input type="number" id="product-price" name="product-price" step="0.01" required>
+            
+                        <label for="product-image">Product Image:</label>
+                        <!-- <input type="file" id="product-image" name="product-image" accept="image/*" required> -->
+                        <input type="text" id="product-image" name="product-image"  required>
+            
+                        <label for="product-stock">Stock:</label>
+                        <input type="number" id="product-stock" name="product-stock" required>
+            
+                        <div class="msg"></div>
+                        <button type="submit" class="btn">Add Product</button>
+                    </form>
+                </div>
+
+
+
+
+            <!-- Product cards will be dynamically generated here -->
+        </div>
+
+
+        <div style="display: none;" id="lottie-animation">
+            <lottie-player src="https://lottie.host/e62d7192-b56b-4e78-8103-eaa618ff6947/mn9eq0lpZX.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+            <h2>No results found :(</h2>
+        </div>
+      
+
+    </div>
+
+
+
+    <script src="dashboard.js"></script>
+    <script src="/Frontend/admin-dashboard/admin-dashboard.js"></script>
+    <script src="/Frontend/customer-dashboard/customer-dashboard.js"></script>
+    <script src='https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js'></script>
+
+</body>
+
+</html>
